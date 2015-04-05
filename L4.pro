@@ -11,12 +11,15 @@ QT       -= gui
 TARGET = L4
 CONFIG   += console
 CONFIG   -= app_bundle
+CONFIG += C++11
 
 TEMPLATE = app
 
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    record.cpp
 
 HEADERS += \
     list.h \
-    node.h
+    node.h \
+    record.h

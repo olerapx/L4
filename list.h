@@ -21,6 +21,9 @@ public:
   void add(const T &value);
   inline void operator << (const T& value) {add(value);}
   void insert (const T& value, int index);
+  void insertAfterValue (const T& value, const T& after);
+  void insertBeforeValue (const T& value, const T& before);
+  void insertAtMid (const T& value);
 
   const T &at(int index);
   inline const T & operator [] (int index){ return at(index);}
@@ -28,6 +31,9 @@ public:
 
   void removeValue (const T& value);
   void removeAt(int index);
+  void removeAtMid();
+  void removeAtEnd();
+  void removeAtBegin();
 
   void clear();
 
@@ -113,6 +119,7 @@ void List<T>::add(const T& value)
      {
      }
  }
+
 
 template <typename T>
 bool List<T>::isExists(const T &value)

@@ -16,3 +16,7 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp
+
+HEADERS += \
+    list.h \
+    node.h

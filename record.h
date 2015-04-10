@@ -2,13 +2,13 @@
 #define RECORD_H
 #include <string.h>
 #include <iostream>
-#include <QDate>
+#include <ctime>
 
 
 struct Record
 {
     std::string _content;
-    QDate _date;
+    time_t _date;
 };
 
 #endif // RECORD_H

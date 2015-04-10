@@ -1,27 +1,28 @@
 #include "notebook.h"
 
-Record* Notebook::createRecord(std::string content, QDate date)
+Record* Notebook::createRecord(std::string content, time_t date)
 {
     Record* record=new Record();
     record->_content=content;
     record->_date=date;
+
     return record;
 }
 
-void Notebook::addRecord(std::string text, QDate date)
+void Notebook::addRecord(std::string text, time_t date)
 {
     Record* rec=createRecord(text, date);
     recordList.add(rec);
 
 }
 
-void Notebook::insertRecord(std::string text, QDate date, int pageIndex)
+void Notebook::insertRecord(std::string text, time_t date, int pageIndex)
 {
     Record* rec=createRecord(text, date);
     recordList.insert(rec, pageIndex);
 }
 
-void Notebook::insertRecordAfterDate(std::string text, QDate date, QDate after)
+void Notebook::insertRecordAfterDate(std::string text, time_t date, time_t after)
 {
     int index = indexOf(after);
     if (index==-1) return;
@@ -30,7 +31,7 @@ void Notebook::insertRecordAfterDate(std::string text, QDate date, QDate after)
     recordList.insert(rec, index+1);
 }
 
-void Notebook::insertRecordBeforeDate(std::string text, QDate date, QDate before)
+void Notebook::insertRecordBeforeDate(std::string text, time_t date, time_t before)
 {
     int index = indexOf(before);
     if (index==-1) return;
@@ -39,7 +40,7 @@ void Notebook::insertRecordBeforeDate(std::string text, QDate date, QDate before
     recordList.insert(rec, index);
 }
 
-void Notebook::insertRecordAfterContent(std::string text, QDate date, std::string after)
+void Notebook::insertRecordAfterContent(std::string text, time_t date, std::string after)
 {
     int index = indexOf(after);
     if (index==-1) return;
@@ -49,7 +50,7 @@ void Notebook::insertRecordAfterContent(std::string text, QDate date, std::strin
 
 }
 
-void Notebook::insertRecordBeforeContent(std::string text, QDate date, std::string before)
+void Notebook::insertRecordBeforeContent(std::string text, time_t date, std::string before)
 {
     int index = indexOf(before);
     if (index==-1) return;
@@ -59,7 +60,7 @@ void Notebook::insertRecordBeforeContent(std::string text, QDate date, std::stri
 
 }
 
-void Notebook::insertAtMid(std::string text, QDate date)
+void Notebook::insertAtMid(std::string text, time_t date)
 {
      Record* rec=createRecord(text, date);
      recordList.insertAtMid(rec);
@@ -92,7 +93,7 @@ void Notebook::removeAt(int pageIndex)
 
 }
 
-void Notebook::removeByDate(QDate date)
+void Notebook::removeByDate(time_t date)
 {
     int index = indexOf(date);
 
@@ -108,7 +109,7 @@ void Notebook::removeByContent(std::string text)
     recordList.removeAt(index);
 }
 
-std::string Notebook::readRecord(QDate date)
+std::string Notebook::readRecord(time_t date)
 {    
     int index = indexOf(date);
     return recordList.at(index)->_content;
@@ -119,19 +120,19 @@ std::string Notebook::readRecord(int pageIndex)
     return recordList.at(pageIndex)->_content;
 }
 
-QDate Notebook::readDate (std::string text)
+time_t Notebook::readDate (std::string text)
 {
     int index = indexOf(text);
     return recordList.at(index)->_date;
 }
 
-QDate Notebook::readDate (int pageIndex)
+time_t Notebook::readDate (int pageIndex)
 {
  return recordList.at(pageIndex)->_date;
 }
 
 
-int Notebook::indexOf(QDate date)
+int Notebook::indexOf(time_t date)
 {
      for(int i=0;i<recordList.Len();i++)
           if (recordList.at(i)->_date==date) return i;
@@ -152,6 +153,8 @@ int Notebook::indexOf(std::string text){
 void Notebook::writeToFile (std::ofstream& out)
 {
 for (int i=0;i<recordList.Len();i++)
-  out<< "Date: " << recordList.at(i)->_date.toString("dd MMMM yyyy").toStdString()<<"г.\nRecord: " <<recordList.at(i)->_content<<"\n\n\n";
-
+{
+    out<<"Date: "<<ctime(&recordList.at(i)->_date)<<"\n";
+    out<<"Record: " <<recordList.at(i)->_content<<"\n\n\n";
+}
 }

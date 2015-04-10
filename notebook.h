@@ -2,6 +2,7 @@
 #define NOTEBOOK_H
 #include "list.h"
 #include "record.h"
+#include "fstream"
 
 class Notebook
 {
@@ -32,6 +33,10 @@ public:
 
   inline int getPageNumber() { return recordList.Len(); }
 
+  int indexOf(QDate date);
+  int indexOf(std::string text);
+
+  void writeToFile (std::ofstream& out);
 };
 
 #endif // NOTEBOOK_H

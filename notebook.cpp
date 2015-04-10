@@ -84,7 +84,7 @@ void Notebook::removeAtEnd()
     delete recordList.at(recordList.Len()-1);
     recordList.removeAt(recordList.Len()-1);
 }
-void Notebook::removeAt(int pageIndex)
+void Notebook::removeAt(unsigned int pageIndex)
 {
     delete recordList.at(pageIndex);
     recordList.removeAt(pageIndex);
@@ -110,7 +110,7 @@ std::string Notebook::readRecord(time_t date)
     return recordList.at(index)->_content;
 }
 
-std::string Notebook::readRecord(int pageIndex)
+std::string Notebook::readRecord(unsigned int pageIndex)
 {
     return recordList.at(pageIndex)->_content;
 }
@@ -121,11 +121,21 @@ time_t Notebook::readDate (std::string text)
     return recordList.at(index)->_date;
 }
 
-time_t Notebook::readDate (int pageIndex)
+time_t Notebook::readDate (unsigned int pageIndex)
 {
  return recordList.at(pageIndex)->_date;
 }
 
+std::string Notebook::readDateString(std::string text)
+{
+     int index = indexOf(text);
+    return ctime(&recordList.at(index)->_date);
+}
+
+std::string Notebook::readDateString(unsigned int pageIndex)
+{
+     return ctime(&recordList.at(pageIndex)->_date);
+}
 
 int Notebook::indexOf(time_t date)
 {

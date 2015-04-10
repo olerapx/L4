@@ -24,21 +24,24 @@ public:
    void removeAtMid();
    void removeAtBegin();
    void removeAtEnd();
-   void removeAt(int pageIndex);
+   void removeAt(unsigned int pageIndex);
    void removeByDate(time_t date);
    void removeByContent(std::string text);
 
    std::string readRecord(time_t date);
-   std::string readRecord(int pageIndex);
+   std::string readRecord(unsigned int pageIndex);
    time_t readDate (std::string text);
-   time_t readDate (int pageIndex);
-
+   time_t readDate (unsigned int pageIndex);
+   std::string readDateString(std::string text);
+   std::string readDateString(unsigned int pageIndex);
   inline int getPageNumber() { return recordList.Len(); }
 
   int indexOf(time_t date);
   int indexOf(std::string text);
 
   void writeToFile (std::ofstream& out);
+
+  inline unsigned int len(){return recordList.Len();}
 };
 
 #endif // NOTEBOOK_H

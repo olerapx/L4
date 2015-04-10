@@ -56,47 +56,43 @@ void Notebook::insertRecordBeforeContent(std::string text, time_t date, std::str
     if (index==-1) return;
 
     Record* rec=createRecord(text, date);
-    recordList.insert(rec, index);
+    recordList.insert(rec, recordList.Len()/2);
 
 }
 
 void Notebook::insertAtMid(std::string text, time_t date)
 {
      Record* rec=createRecord(text, date);
-     recordList.insertAtMid(rec);
+     recordList.insert(rec, recordList.Len()/2);
 }
 
 void Notebook::removeAtMid()
 {
    int mid=(recordList.Len()%2==0)? recordList.Len()/2-1:recordList.Len()/2;
    delete recordList.at(mid);
-
-   recordList.removeAtMid();
+   recordList.removeAt(mid);
 }
 
 void Notebook::removeAtBegin()
 {
     delete recordList.at(0);
-    recordList.removeAtBegin();
+    recordList.removeAt(0);
 }
 
 void Notebook::removeAtEnd()
 {
     delete recordList.at(recordList.Len()-1);
-    recordList.removeAtEnd();
-
+    recordList.removeAt(recordList.Len()-1);
 }
 void Notebook::removeAt(int pageIndex)
 {
     delete recordList.at(pageIndex);
     recordList.removeAt(pageIndex);
-
 }
 
 void Notebook::removeByDate(time_t date)
 {
     int index = indexOf(date);
-
     delete recordList.at(index);
     recordList.removeAt(index);
 }
@@ -104,8 +100,7 @@ void Notebook::removeByDate(time_t date)
 void Notebook::removeByContent(std::string text)
 {
     int index=indexOf(text);
-
-     delete recordList.at(index);
+    delete recordList.at(index);
     recordList.removeAt(index);
 }
 
@@ -134,27 +129,24 @@ time_t Notebook::readDate (int pageIndex)
 
 int Notebook::indexOf(time_t date)
 {
-     for(int i=0;i<recordList.Len();i++)
+     for(unsigned int i=0;i<recordList.Len();i++)
           if (recordList.at(i)->_date==date) return i;
-
 
     return -1;
 }
 
 int Notebook::indexOf(std::string text){
-    for(int i=0;i<recordList.Len();i++)
+    for(unsigned int i=0;i<recordList.Len();i++)
          if (recordList.at(i)->_content==text) return i;
 
-
    return -1;
-
 }
 
 void Notebook::writeToFile (std::ofstream& out)
 {
-for (int i=0;i<recordList.Len();i++)
-{
-    out<<"Date: "<<ctime(&recordList.at(i)->_date)<<"\n";
-    out<<"Record: " <<recordList.at(i)->_content<<"\n\n\n";
-}
+    for (unsigned int i=0;i<recordList.Len();i++)
+    {
+        out<<"Date: "<<ctime(&recordList.at(i)->_date)<<"\n";
+        out<<"Record: " <<recordList.at(i)->_content<<"\n\n\n";
+    }
 }

@@ -21,7 +21,6 @@ public:
   void add(const T &value);
   inline void operator << (const T& value) {add(value);}
   void insert (const T& value, int index);
-  inline void insertAtMid (const T& value) { insert(value, len/2); }
 
   const T &at(int index);
   inline const T & operator [] (int index){ return at(index);}
@@ -29,9 +28,6 @@ public:
 
   void removeValue (const T& value);
   void removeAt(int index);
-  inline void removeAtMid() { (len%2==0)? removeAt(len/2-1):removeAt(len/2); }
-  inline void removeAtEnd(){ removeAt(len-1); }
-  inline void removeAtBegin() { removeAt(0); }
 
   void clear();
 

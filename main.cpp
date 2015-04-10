@@ -5,12 +5,13 @@
 
 int main()
 {
-Notebook n;
-n.addRecord("Test WW II record", QDate::fromJulianDay(2431200));
-n.addRecord("test near future record", QDate::fromJulianDay(2472340));
-std::ofstream out;
-out.open("record");
-n.writeToFile(out);
-out.close();
+
+    Notebook n;
+    n.addRecord("First record", time(0));
+    n.addRecord("Second record", time(0));
+    std::ofstream out;
+    out.open("record");
+    n.writeToFile(out);
+    out.close();
     return 0;
 }

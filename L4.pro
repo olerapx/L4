@@ -17,9 +17,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    record.cpp
+    notebook.cpp
 
 HEADERS += \
     list.h \
     node.h \
-    record.h
+    record.h \
+    notebook.h

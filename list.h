@@ -23,7 +23,7 @@ public:
   void insert (const T& value, int index);
   void insertAfterValue (const T& value, const T& after);
   void insertBeforeValue (const T& value, const T& before);
-  void insertAtMid (const T& value);
+  inline void insertAtMid (const T& value) { insert(value, len/2); }
 
   const T &at(int index);
   inline const T & operator [] (int index){ return at(index);}
@@ -31,9 +31,9 @@ public:
 
   void removeValue (const T& value);
   void removeAt(int index);
-  void removeAtMid();
-  void removeAtEnd();
-  void removeAtBegin();
+  inline void removeAtMid() { (len%2==0)? removeAt(len/2-1):removeAt(len/2); }
+  inline void removeAtEnd(){ removeAt(len-1); }
+  inline void removeAtBegin() { removeAt(0); }
 
   void clear();
 
@@ -119,6 +119,22 @@ void List<T>::add(const T& value)
      {
      }
  }
+template <typename T>
+ void List<T>::insertAfterValue(const T &value, const T &after)
+ {
+     int index=indexOf(after);
+     if (index==-1) return;
+
+     insert(value, index+1);
+ }
+template <typename T>
+ void List<T>::insertBeforeValue(const T &value, const T &before)
+ {
+     int index=indexOf(before);
+     if (index==-1) return;
+
+     insert(value, index);
+ }
 
 
 template <typename T>
@@ -183,7 +199,6 @@ void List<T>::removeAt(int index)
       {
       }
   }
-
 
 template <typename T>
 void List<T>::clear()

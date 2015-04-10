@@ -5,6 +5,9 @@
 
 class Record
 {
+private:
+
+
 public:
     std::string content, date;
 };

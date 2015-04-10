@@ -21,8 +21,8 @@ public:
   void add(const T &value);
   inline void operator << (const T& value) {add(value);}
   void insert (const T& value, int index);
-  void insertAfterValue (const T& value, const T& after);
-  void insertBeforeValue (const T& value, const T& before);
+ // void insertAfterValue (const T& value, const T& after);
+//  void insertBeforeValue (const T& value, const T& before);
   inline void insertAtMid (const T& value) { insert(value, len/2); }
 
   const T &at(int index);
@@ -119,7 +119,7 @@ void List<T>::add(const T& value)
      {
      }
  }
-template <typename T>
+/*template <typename T>
  void List<T>::insertAfterValue(const T &value, const T &after)
  {
      int index=indexOf(after);
@@ -136,7 +136,7 @@ template <typename T>
      insert(value, index);
  }
 
-
+*/
 template <typename T>
 bool List<T>::isExists(const T &value)
 {

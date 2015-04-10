@@ -2,14 +2,13 @@
 #define RECORD_H
 #include <string.h>
 #include <iostream>
+#include <QDate>
 
-class Record
+
+struct Record
 {
-private:
-
-
-public:
-    std::string content, date;
+    std::string _content;
+    QDate _date;
 };
 
 #endif // RECORD_H

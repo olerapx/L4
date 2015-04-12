@@ -10,6 +10,8 @@ class Notebook
 {
 private:
     List<Record *> recordList;
+
+    //initializes object of Record class to put into List
     Record* createRecord(std::string content, time_t date);
 
 public:
@@ -32,13 +34,15 @@ public:
    std::string readRecord(unsigned int pageIndex);
    time_t readDate (std::string text);
    time_t readDate (unsigned int pageIndex);
+
+   //returns date in string form
    std::string readDateString(std::string text);
    std::string readDateString(unsigned int pageIndex);
-  inline int getPageNumber() { return recordList.Len(); }
 
   int indexOf(time_t date);
   int indexOf(std::string text);
 
+  //I really don't know whether should it be here or not
   void writeToFile (std::ofstream& out);
 
   inline unsigned int len(){return recordList.Len();}

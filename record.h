@@ -4,7 +4,6 @@
 #include <iostream>
 #include <ctime>
 
-
 struct Record
 {
     std::string _content;
